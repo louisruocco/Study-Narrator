@@ -1,3 +1,12 @@
+$path = ".\path.txt"
+
+if(!(Test-Path ".\path.txt")){
+    new-item -path ".\path.txt"
+    start-process ".\path.txt"
+} else {
+    Read-Notes
+}
+
 function Read-Notes {
     $path = Get-Content ".\path.txt"
 
@@ -17,8 +26,6 @@ function Read-Notes {
     $speak = New-Object System.Speech.Synthesis.SpeechSynthesizer
     $speak.SpeakAsync($finalText)
 }
-
-Read-Notes
 
 function Change-Path {
     start-process ".\path.txt"

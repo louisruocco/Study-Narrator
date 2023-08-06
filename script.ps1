@@ -1,5 +1,5 @@
 function Read-Notes {
-    $path = "E:\Obsidian Vaults\IT\AZ-104"
+    $path = Get-Content ".\path.txt"
 
     $dirs = Get-ChildItem $path -Exclude "images", "Exam Overview.md", "revision topics.txt"
     $getRandomFolder = $dirs | Sort-Object {Get-Random}
@@ -19,3 +19,7 @@ function Read-Notes {
 }
 
 Read-Notes
+
+function Change-Path {
+    start-process ".\path.txt"
+}

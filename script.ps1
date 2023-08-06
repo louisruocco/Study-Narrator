@@ -1,8 +1,8 @@
 $path = ".\path.txt"
 
-if(!(Test-Path ".\path.txt")){
-    new-item -path ".\path.txt"
-    start-process ".\path.txt"
+if(!(Test-Path $path)){
+    new-item -path $path
+    start-process $path
 } else {
     Read-Notes
 }

@@ -1,9 +1,7 @@
-## Paste paths that need to be narrated
-$paths = "E:\Obsidian Vaults\IT\AZ-104"
+function Read-Notes {
+    $path = "E:\Obsidian Vaults\IT\AZ-104"
 
-##Get the child items and content of the docs in the paths
-function Get-Notes {
-    $dirs = Get-ChildItem $paths -Exclude "images", "Exam Overview.md", "revision topics.txt"
+    $dirs = Get-ChildItem $path -Exclude "images", "Exam Overview.md", "revision topics.txt"
     $getRandomFolder = $dirs | Sort-Object {Get-Random}
     $firstFolder = $getRandomFolder[0]
     
@@ -13,9 +11,11 @@ function Get-Notes {
     
     $notePath = $firstNote.DirectoryName
     $text = Get-Content $notePath\$firstNote
-    $text -replace '#', '' -replace "=", '' -replace '-', '' -replace 'Practice Questions.*', '' -replace 'Knowledge Check.*', '' -replace 'AZ104', '' -replace 'Exercises:.*', ''
+    $finalText = $text -replace '#', '' -replace "=", '' -replace '-', '' -replace 'Practice Questions.*', '' -replace 'Knowledge Check.*', '' -replace 'AZ104', '' -replace 'Exercises:.*', '' -replace '\*', ''
+
+    Add-Type -AssemblyName System.speech
+    $speak = New-Object System.Speech.Synthesis.SpeechSynthesizer
+    $speak.SpeakAsync($finalText)
 }
 
-Get-Notes
-
-# Read them out
+Read-Notes

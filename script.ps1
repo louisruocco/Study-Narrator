@@ -5,7 +5,7 @@ $paths = "E:\Obsidian Vaults\IT\AZ-104"
 function Read-Notes {
     $dirs = Get-ChildItem $paths
     foreach($dir in $dirs){
-       Get-ChildItem $paths\$dir
+       Get-ChildItem $paths\$dir -Exclude "images"
     }
 }
 

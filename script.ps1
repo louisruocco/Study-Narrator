@@ -3,8 +3,6 @@ $path = ".\path.txt"
 if(!(Test-Path $path)){
     new-item -path $path
     start-process $path
-} else {
-    Read-Notes
 }
 
 function Read-Notes {
@@ -25,6 +23,11 @@ function Read-Notes {
     Add-Type -AssemblyName System.speech
     $speak = New-Object System.Speech.Synthesis.SpeechSynthesizer
     $speak.SpeakAsync($finalText)
+}
+
+for($i = 0; $i -le 3; $i++){
+    Read-Notes
+    Read-Host "Dictation in progress, press enter when ready to move to the next dictation"
 }
 
 function Change-Path {
